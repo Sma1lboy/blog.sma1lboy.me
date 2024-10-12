@@ -5,10 +5,16 @@ on:
     branches: ['main']
     paths:
       - 'assets/**'
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test ci tags'
 
 jobs:
   convert-videos:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,9 +31,11 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add assets
           current_date=$(date +"%Y-%m-%d")
           git commit -m "ci: convert videos to GIF (Date: $current_date)" -a || echo "No changes to commit"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
