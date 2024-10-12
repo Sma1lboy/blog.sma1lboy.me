@@ -1,0 +1,33 @@
+name: Convert Videos to GIFs
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'assets/**'
+
+jobs:
+  convert-videos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Run video converter script
+        run: |
+          chmod +x ./video-converter.sh
+          ./video-converter.sh
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets
+          current_date=$(date +"%Y-%m-%d")
+          git commit -m "ci: convert videos to GIF (Date: $current_date)" -a || echo "No changes to commit"
+          git push

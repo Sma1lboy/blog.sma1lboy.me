@@ -1,6 +1,11 @@
 ---
 Date: 2024-10-04
 ---
+
+![](assets/Most%20Frequently%20Keybinding%20in%20Vim/test.gif)
+
+
+
 The purpose of this article is to provide students who already know how to use Vim basics, but want to operate without leaving the keyboard in more situations.
 Here we will summarize the most common scenarios.
 Common shortcuts:
@@ -54,3 +59,5 @@ Auto-align:
 <video width="100%" controls>
   <source src="assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.28.22.mov" type="video/quicktime">
 </video>
+
+
