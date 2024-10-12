@@ -4,8 +4,8 @@ Date: 2024-10-04
 
 The purpose of this article is to provide students who already know how to use Vim basics, but want to operate without leaving the keyboard in more situations.
 Here we will summarize the most common scenarios.
-Common shortcuts:
 
+Common shortcuts:
 ```plain
 $ means last char of current line
 0 means first index of current line
@@ -20,7 +20,6 @@ b when at middle of char, go to first char, when at first char, go to prev word
 ```
 
 Jumping between brackets:
-
 ```plain
 [[ //prev block
 ]] //next block
@@ -29,33 +28,25 @@ Jumping between brackets:
 ```
 
 Swapping two lines:
-
 ```plain
 ddp
 ```
-
 ![](assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.09.20.gif)
 
 Inserting repeated code:
-
 ```plain
 (repeat numbers) -> a -> (content) -> esc
 ```
-
 ![](assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.14.04.gif)
 
 Deleting content inside brackets (large, medium, small, ", '):
-
 ```plain
 d/c -> i -> (/[/{/"/' also back bracket works as well
 ```
-
 ![](assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.19.41.gif)
 
 Auto-align:
-
 ```plain
 (selection) -> =
 ```
-
 ![](assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.28.22.gif)
