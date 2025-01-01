@@ -1,3 +1,8 @@
+---
+title: 'Weekly AI 2024-12-17 Transformer'
+date: '2024-12-17'
+---
+
 这是第一篇Weekly AI，主要是帮助我更快更好的整理对现有AI体系的理解，也希望能帮到看到这篇文章的你～
 
 本周主要研究了 **Transformer** 架构。
@@ -23,11 +28,13 @@
 
 - `inputs embedding + positional encoding => positional input embeddings`
 - 使用三角函数实现位置编码：
-  
+
   ```python
   PE(pos,2i) = sin(pos/10000^(2i/d_model))
   PE(pos,2i+1) = cos(pos/10000^(2i/d_model))
-```
+  ```
+
+````
 
 - 奇数 time step 使用正弦，偶数 time step 使用余弦
 - 这种设计允许模型学习相对位置关系
@@ -53,7 +60,7 @@
 
 ```python
 Attention(Q,K,V) = softmax(QK^T/√dk)V
-```
+````
 
 - 除以√dk 为了控制梯度，防止 softmax 进入饱和区
 - softmax 确保所有注意力权重和为 1
@@ -96,17 +103,14 @@ y_t = W_y * h_t + b_y
 句子 "我喜欢猫"：
 
 - **第1步**: 输入"我"
-    
-    - 记忆：记住"我"
-    - 输出：这是一个人称代词
+  - 记忆：记住"我"
+  - 输出：这是一个人称代词
 - **第2步**: 输入"喜欢"
-    
-    - 记忆：与"我"的上下文关联
-    - 输出：正面情感
+  - 记忆：与"我"的上下文关联
+  - 输出：正面情感
 - **第3步**: 输入"猫"
-    
-    - 记忆：理解"我喜欢猫"
-    - 输出：完成一个喜爱表达
+  - 记忆：理解"我喜欢猫"
+  - 输出：完成一个喜爱表达
 
 ### RNN 的主要问题
 
@@ -128,17 +132,13 @@ RNN 就像透过小孔读长卷轴：
 **计算并行性**：
 
 - **RNN**：必须一个接一个处理
-    
-    ```python
-    输入1 -> 处理 -> 输入2 -> 处理 -> 输入3 -> 处理
-    ```
-    
+  ```python
+  输入1 -> 处理 -> 输入2 -> 处理 -> 输入3 -> 处理
+  ```
 - **注意力机制**：可同时处理所有输入
-    
-    ```python
-    [输入1, 输入2, 输入3] -> 并行处理
-    ```
-    
+  ```python
+  [输入1, 输入2, 输入3] -> 并行处理
+  ```
 
 **长距离依赖**：
 
@@ -197,19 +197,21 @@ Self_Attention = softmax(QK^T/√d_k)V
 BERT 的核心创新在于其预训练策略和双向特性。
 
 1. 架构：
-    
-    - 使用 Transformer 编码器部分（双向）
-    - BERT-base：12层编码器，768隐藏维度，12头注意力
-    - BERT-large：24层编码器，1024隐藏维度，16头注意力
+
+   - 使用 Transformer 编码器部分（双向）
+   - BERT-base：12层编码器，768隐藏维度，12头注意力
+   - BERT-large：24层编码器，1024隐藏维度，16头注意力
+
 2. 预训练任务：
-    
-    - **Masked Language Model (MLM)**：随机遮盖15%输入token，模型需预测遮盖词
-    - **Next Sentence Prediction (NSP)**：预测两个句子是否相邻，理解句间关系
+
+   - **Masked Language Model (MLM)**：随机遮盖15%输入token，模型需预测遮盖词
+   - **Next Sentence Prediction (NSP)**：预测两个句子是否相邻，理解句间关系
+
 3. 输入表示：
-    
-    - Token Embeddings
-    - Segment Embeddings
-    - Position Embeddings 三者相加得到最终输入
+
+   - Token Embeddings
+   - Segment Embeddings
+   - Position Embeddings 三者相加得到最终输入
 
 ---
 
@@ -218,19 +220,21 @@ BERT 的核心创新在于其预训练策略和双向特性。
 GPT 系列是生成式 AI 的重要进展：
 
 1. 架构特点：
-    
-    - 使用 Transformer 解码器部分
-    - 单向注意力（只看左侧内容）
-    - 逐 token 生成文本
+
+   - 使用 Transformer 解码器部分
+   - 单向注意力（只看左侧内容）
+   - 逐 token 生成文本
+
 2. 演变历程：
-    
-    - GPT-1：初步证明大规模语言模型预训练有效性
-    - GPT-2：扩展模型规模（1.5B参数），改进文本生成质量
-    - GPT-3：175B参数，few-shot 学习能力，多任务处理
+
+   - GPT-1：初步证明大规模语言模型预训练有效性
+   - GPT-2：扩展模型规模（1.5B参数），改进文本生成质量
+   - GPT-3：175B参数，few-shot 学习能力，多任务处理
+
 3. 预训练策略：
-    
-    - 自回归语言建模（预测下一个token）
-    - 使用因果掩码确保单向注意力
+
+   - 自回归语言建模（预测下一个token）
+   - 使用因果掩码确保单向注意力
 
 ---
 
@@ -254,8 +258,8 @@ GPT 系列是生成式 AI 的重要进展：
 - 架构选择：BERT(编码器，双向) vs GPT(解码器，单向)
 - 预训练任务：BERT(MLM+NSP) vs GPT(自回归建模)
 - 应用场景：
-    - BERT擅长理解任务
-    - GPT擅长文本生成
+  - BERT擅长理解任务
+  - GPT擅长文本生成
 
 ---
 
@@ -313,6 +317,8 @@ BERT 能通过同时查看 prefix 和 suffix 做出更合理的中间补全。
 ---
 
 # What is input/output embedding
+
 **Embedding**：
+
 - 是一个将对象（如词、token）映射到向量空间的过程
 - 向量包含深层语义信息，表示输入之间的关系和相似性
