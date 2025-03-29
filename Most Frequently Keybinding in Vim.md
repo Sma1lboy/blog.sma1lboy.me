@@ -31,22 +31,22 @@ Swapping two lines:
 ```plain
 ddp
 ```
-![](assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.09.20.gif)
+![](https://61f32d1.webp.li/2025/03/20250328193602800.gif)
 
 Inserting repeated code:
 ```plain
 (repeat numbers) -> a -> (content) -> esc
 ```
-![](assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.14.04.gif)
+![](https://61f32d1.webp.li/2025/03/20250328193602823.gif)
 
 Deleting content inside brackets (large, medium, small, ", '):
 ```plain
 d/c -> i -> (/[/{/"/' also back bracket works as well
 ```
-![](assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.19.41.gif)
+![](https://61f32d1.webp.li/2025/03/20250328193602837.gif)
 
 Auto-align:
 ```plain
 (selection) -> =
 ```
-![](assets/Most%20Frequently%20Keybinding%20in%20Vim/Screen%20Recording%202024-10-04%20at%2021.28.22.gif)
+![](https://61f32d1.webp.li/2025/03/20250328193602850.gif)

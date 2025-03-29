@@ -65,7 +65,7 @@ Attention(Q,K,V) = softmax(QK^T/√dk)V
 - 除以√dk 为了控制梯度，防止 softmax 进入饱和区
 - softmax 确保所有注意力权重和为 1
 
-![](../assets/AI%20Worlds%20Vocab/image-20241010113555453.png)
+![](https://61f32d1.webp.li/2025/03/20250328193628862.png)
 
 ---
 

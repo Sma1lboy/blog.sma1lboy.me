@@ -44,7 +44,7 @@ At this point, when you restart the Application and try to access `/hello`, you'
 
 ## Login Verification Process
 
-![Login Verification Process](./assets/Spring%20Security%20Notes/image-20240502000955210.png)
+![Login Verification Process](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823442.png)
 
 The core principle is that during the first login:
 
@@ -63,7 +63,7 @@ The core principle is that during the first login:
 ### Complete Spring Security Process
 
 Spring Security is essentially a filter chain, containing filters that provide various functionalities.
-![Spring Security Filter Chain](./assets/Spring%20Security%20Notes/image-20240502001706129.png)
+![Spring Security Filter Chain](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823466.png)
 
 The image only shows core filters; non-core filters are hidden.
 
@@ -76,7 +76,7 @@ The first two are responsible for **authentication**, while the last one is resp
 
 ### Entry-level Case Authentication Process
 
-![Authentication Process](./assets/Spring%20Security%20Notes/image-20240502002749857.png)
+![Authentication Process](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823479.png)
 
 Authentication interface: Its implementation class represents the current user accessing the system, encapsulating user-related information.
 AuthenticationManager interface: Defines the method for authenticating Authentication.
@@ -99,17 +99,17 @@ Authentication process:
 
 1. We definitely can't use the default UserDetailsService; we need to get information from our database.
 2. When the information is returned to the Filter, we can't generate a token, so we need to replace this layer of Filter in our own Controller, then call the second layer in the controller.
-   ![Modified Authentication Process](./assets/Spring%20Security%20Notes/image-20240502004820504.png)
+   ![Modified Authentication Process](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823488.png)
 
 ## How to Verify Subsequently
 
-![Subsequent Verification Process](./assets/Spring%20Security%20Notes/image-20240502005126589.png)
+![Subsequent Verification Process](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823497.png)
 
 But how do we get complete user information later? If we want to get user permissions, do we need to search the database again?
 So we can use Redis cache or use ThreadLocal (not suitable for clusters) to reduce database pressure.
 When authentication passes and JWT is generated, use userId as the key and user information as the value, and store it in Redis.
-![Storing User Information in Redis](./assets/Spring%20Security%20Notes/image-20240502005356933.png)
-![Retrieving User Information from Redis](./assets/Spring%20Security%20Notes/image-20240502005409646.png)
+![Storing User Information in Redis](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823504.png)
+![Retrieving User Information from Redis](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823511.png)
 
 ## Thought Summary
 
@@ -169,7 +169,7 @@ First, enable the annotation method through `@EnableGlobalMethodSecurity(prePost
 Then add the @PreAuthorize annotation to the method to mark permissions. Later, we can self-encapsulate based on PreAuthorize.
 
 Similarly, we need to encapsulate permissions into the Authentication object when logging in for the first time. The actual permissions can be stored anywhere. If we just think about it, the chosen solution is to store permissions in the object, and then implement OneToMany. It's similar to this:
-![User-to-Permissions Relationship](./assets/Spring%20Security%20Notes/image-20240504000837146.png)
+![User-to-Permissions Relationship](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823518.png)
 
 Right? But if there are too many users, and one user corresponds to multiple permissions, it will actually make the table explode.
 
@@ -183,7 +183,7 @@ So here's a solution called
 
 Role-Based Access Control, which is currently the most used and most common among developers.
 
-![RBAC Model](./assets/Spring%20Security%20Notes/image-20240504001025094.png)
+![RBAC Model](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823525.png)
 
 Similarly, it can be understood that we use **roles** to:
 
@@ -239,6 +239,6 @@ Spring Security's method of prevention is to generate a csrf_token. The backend 
 
 CSRF attacks rely on the authentication information carried in cookies, but in front-end and back-end separated projects, we don't use cookies, and the token is not 21stored in cookies. So we don't need this, and we execute by putting the token in the request header through front-end code.
 
-![CSRF Attack and Prevention](./assets/Spring%20Security%20Notes/image-20240504173716667.png)
+![CSRF Attack and Prevention](https://pub-05f1b0ce14a14e43a0ca174027db3488.r2.dev/2025/01/20250119005823532.png)
 
 So why can it prevent? We usually put the token in localStorage, and web B cannot cross-domain read web A's localStorage.
